@@ -21,7 +21,7 @@ describe('api', () => {
     const dir = mkdtempSync(join(tmpdir(), 'organizer-api-'))
     const { base, close } = await boot(dir)
     const health = await fetch(`${base}/api/health`)
-    expect((await health.json()).ok).toBe(true)
+    expect(((await health.json()) as { ok: boolean }).ok).toBe(true)
     await fetch(`${base}/api/settings`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ llmEnabled: true }) })
     const s = await (await fetch(`${base}/api/settings`)).json() as { llmEnabled: boolean }
     expect(s.llmEnabled).toBe(true)

@@ -27,7 +27,6 @@ export function createApp(ctx: { settings: Settings; db: DatabaseSync; getDataDi
       const runId = insertScanRun(ctx.db, roots)
       const files = await scan(roots, {
         dataDir: ctx.getDataDir(),
-        signal: stream.abort,
         onProgress: p => void stream.writeSSE({ data: JSON.stringify(p) }),
       })
       insertFiles(ctx.db, runId, files)
