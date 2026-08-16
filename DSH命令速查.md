@@ -138,6 +138,7 @@ git add -A && git commit -m "改了什么" && git push
 - 首次推送前需要先建好 GitHub 仓库（浏览器新建，或 \`gh repo create\`）。
 - fine-grained PAT 若没有「创建仓库」权限，会报 \`Resource not accessible (createRepository)\`——去 GitHub 新建仓库或换有权限的 token 即可。
 - \`gui-restart-logs/\` 已加入 .gitignore，不会入库。
+- **本机网络 22 端口不通，SSH 走 443**：已配置 \`~/.ssh/config\`（github.com → ssh.github.com:443），生成的密钥在 \`~/.ssh/id_ed25519(.pub)\`，公钥已加到 GitHub 账号。
 
 ---
 
@@ -151,3 +152,5 @@ git add -A && git commit -m "改了什么" && git push
 | 2026-08-16 | `git add -A && git commit -m \"说明\" && git push` | 工作区 git 日常三步同步 |
 | 2026-08-16 | `gh auth login --with-token` | 用 PAT 登录 GitHub CLI（token 存入系统钥匙串） |
 | 2026-08-16 | `gh repo create <名> --private --source . --push` | 创建私有 GitHub 仓库并推送当前目录 |
+| 2026-08-16 | `ssh-keygen -t ed25519` + 公钥贴到 github.com/settings/ssh/new | 生成 SSH 密钥用于 GitHub 推送（本机 22 端口不通，改走 443） |
+| 2026-08-16 | `git push -u origin main` | 推送 main 分支到 GitHub（origin = git@github.com:erkemumu/Organize-computer-files.git） |
