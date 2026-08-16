@@ -21,3 +21,12 @@ export interface FileRecord {
   labels: string[]
   scanRunId: number
 }
+
+export interface MoveLogRow {
+  batchId: string
+  fileId: number
+  from: string
+  to: string
+  status: 'pending' | 'done' | 'skipped' | 'failed'
+  reason?: string
+}
