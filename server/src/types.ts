@@ -30,3 +30,12 @@ export interface MoveLogRow {
   status: 'pending' | 'done' | 'skipped' | 'failed'
   reason?: string
 }
+
+export interface PlanRow {
+  fileId: number
+  from: string
+  to: string
+  reason: 'move' | 'already-exists' | 'conflict-renamed'
+  category: Category
+  year: number
+}
