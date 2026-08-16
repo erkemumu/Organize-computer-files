@@ -13,7 +13,8 @@
 3. [配置查看](#3-配置查看)
 4. [环境与前提](#4-环境与前提)
 5. [注意事项 / 常见问题](#5-注意事项--常见问题)
-6. [新增命令记录](#6-新增命令记录)
+6. [Git / GitHub 同步](#6-git--github-同步)
+7. [新增命令记录](#7-新增命令记录)
 
 ---
 
@@ -110,9 +111,43 @@ pnpm 有时会直接把 `node-pty: set this to true or false` 这类占位符写
 
 ---
 
-## 6. 新增命令记录
+## 6. Git / GitHub 同步
+
+> 本工作区（P1-整理电脑文件）已初始化为 git 仓库，推送到 GitHub 账号 erkemumu。
+
+| 用途 | 命令 |
+| --- | --- |
+| 查看状态 | \`git status\` |
+| 暂存全部改动 | \`git add -A\` |
+| 提交 | \`git commit -m "说明"\` |
+| 推送 | \`git push\` |
+| 拉取 | \`git pull\` |
+| 改提交作者（登录后第一次用） | \`git commit --amend --reset-author\` |
+| 创建 GitHub 仓库并推送 | \`gh repo create <仓库名> --private --source . --push\` |
+| GitHub 登录 | \`gh auth login\`（设备码登录）或 \`gh auth login --with-token\`（贴 PAT） |
+
+**日常同步三步走**：
+
+\`\`\`bash
+cd D:\AI\proj\P1-整理电脑文件
+git add -A && git commit -m "改了什么" && git push
+\`\`\`
+
+**注意**：
+
+- 首次推送前需要先建好 GitHub 仓库（浏览器新建，或 \`gh repo create\`）。
+- fine-grained PAT 若没有「创建仓库」权限，会报 \`Resource not accessible (createRepository)\`——去 GitHub 新建仓库或换有权限的 token 即可。
+- \`gui-restart-logs/\` 已加入 .gitignore，不会入库。
+
+---
+
+## 7. 新增命令记录
 
 | 日期 | 命令 | 用途 |
 | --- | --- | --- |
 | 2026-08-16 | `dsh plugin --profile web add github:omdsh-dev/DSH-better-sidebar` | 安装侧边栏插件（bundle 0.12.2，需 allowBuilds 放行 prepare 与 node-pty） |
 | 2026-08-16 | `dsh plugin --profile web update` | 更新已装插件（记住这个，不再忘） |
+| 2026-08-16 | `powershell -NoProfile -ExecutionPolicy Bypass -File restart-gui.ps1` | 一键重启 DSH Web GUI（dev 模式，验证 3080 端口） |
+| 2026-08-16 | `git add -A && git commit -m \"说明\" && git push` | 工作区 git 日常三步同步 |
+| 2026-08-16 | `gh auth login --with-token` | 用 PAT 登录 GitHub CLI（token 存入系统钥匙串） |
+| 2026-08-16 | `gh repo create <名> --private --source . --push` | 创建私有 GitHub 仓库并推送当前目录 |
