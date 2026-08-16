@@ -1,0 +1,6 @@
+# GUI 重启运行时日志（不入库）
+gui-restart-logs/
+
+# 系统文件
+.DS_Store
+Thumbs.db
