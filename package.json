@@ -1,0 +1,7 @@
+{
+  "name": "organize-computer-files",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Windows 文件整理助手 — pnpm monorepo",
+  "packageManager": "pnpm@11.7.0"
+}

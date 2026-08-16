@@ -4,3 +4,10 @@ gui-restart-logs/
 # 系统文件
 .DS_Store
 Thumbs.db
+
+# Node / pnpm
+node_modules/
+dist/
+*.tsbuildinfo
+.env
+.env.local

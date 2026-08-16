@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "hono": "*",
+    "@hono/node-server": "*"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "tsx": "*",
+    "vitest": "*",
+    "@types/node": "*"
+  }
+}
