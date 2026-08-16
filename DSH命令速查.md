@@ -154,3 +154,4 @@ git add -A && git commit -m "改了什么" && git push
 | 2026-08-16 | `gh repo create <名> --private --source . --push` | 创建私有 GitHub 仓库并推送当前目录 |
 | 2026-08-16 | `ssh-keygen -t ed25519` + 公钥贴到 github.com/settings/ssh/new | 生成 SSH 密钥用于 GitHub 推送（本机 22 端口不通，改走 443） |
 | 2026-08-16 | `git push -u origin main` | 推送 main 分支到 GitHub（origin = git@github.com:erkemumu/Organize-computer-files.git） |
+| 2026-08-16 | `dsh plugin --profile web add github:LayneChai/superpowers-dsh` | 安装 Superpowers skills（obra/superpowers 的 DSH 适配版，14 个技能：TDD/调试/规划/协作/收尾等；无需 allowBuilds） |
