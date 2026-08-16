@@ -15,7 +15,7 @@ export async function scan(roots: string[], opts: { dataDir: string; signal: Abo
   return out
 }
 
-async function walk(dir: string, out: FileRecord[], opts: { signal: AbortSignal }): Promise<void> {
+async function walk(dir: string, out: FileRecord[], opts: { signal: AbortSignal; onProgress?: (p: { done: number; total: number }) => void }): Promise<void> {
   opts.signal.throwIfAborted()
   const entries = await readdir(dir, { withFileTypes: true }).catch(() => [])
   const names = entries.map(e => e.name)
@@ -33,6 +33,7 @@ async function walk(dir: string, out: FileRecord[], opts: { signal: AbortSignal 
       const fh = await readFile(path, { length: HEAD_BYTES }).catch(() => undefined)
       const magic = fh ? sniffMagic(new Uint8Array(fh)) : 'unknown'
       out.push({ id: 0, path, size: st.size, mtimeMs: st.mtimeMs, ext, category: classifyLocal({ path, ext, magic }), labels: [], scanRunId: 0 })
+      opts.onProgress?.({ done: out.length, total: -1 })
     }
   }
 }
