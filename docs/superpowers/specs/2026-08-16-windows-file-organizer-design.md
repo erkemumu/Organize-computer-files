@@ -124,8 +124,8 @@ pnpm workspace 单仓，两个子包：
 - LLM 提供商默认 DeepSeek（复用用户已有 API key 或单独配置）。
 - 第一阶段不实现：文件去重（除重名跳过外）、实时文件监控、多语言 i18n。
 
-## 10. 未决事项
+## 10. 命名与默认值约定
 
-- 项目正式名称（暂定 `file-organizer`）。
-- 默认端口（暂定 `127.0.0.1:8787`）。
+- 项目正式名称：`Organize-computer-files`。
+- 默认端口：`127.0.0.1:8787`。
 - 数据目录默认 `%LOCALAPPDATA%/FileOrganizer`（SQLite + settings.json）。
