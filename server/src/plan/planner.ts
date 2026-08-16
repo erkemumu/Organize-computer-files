@@ -13,10 +13,12 @@ export async function planFiles(files: FileRecord[], archiveRoot: string, io: Pl
     const year = new Date(f.mtimeMs).getFullYear()
     const filename = f.path.split(/[\\/]/).pop()!
     const base = buildTargetPath(archiveRoot, f.category, year, filename)
-    const myHash = await io.hashOf(f.path)
     let dest = base
     let reason: PlanRow['reason']
     if (await io.exists(base)) {
+      // Only compute our hash when the destination already exists — the common
+      // case (new files into an empty archive) never needs a hash read.
+      const myHash = await io.hashOf(f.path)
       if ((await io.hashOf(base)) === myHash) {
         reason = 'already-exists'
       } else {

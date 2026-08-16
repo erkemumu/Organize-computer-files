@@ -29,6 +29,8 @@ export interface MoveLogRow {
   to: string
   status: 'pending' | 'done' | 'skipped' | 'failed'
   reason?: string
+  /** Strategy that was used to perform the move (recorded so undo can replay it). */
+  strategy?: 'rename' | 'copy-delete'
 }
 
 export interface PlanRow {

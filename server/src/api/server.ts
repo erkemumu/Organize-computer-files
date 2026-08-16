@@ -25,12 +25,20 @@ export function createApp(ctx: { settings: Settings; db: DatabaseSync; getDataDi
     return streamSSE(c, async stream => {
       const { roots } = await c.req.json() as { roots: string[] }
       const runId = insertScanRun(ctx.db, roots)
-      const files = await scan(roots, {
-        dataDir: ctx.getDataDir(),
-        onProgress: p => void stream.writeSSE({ data: JSON.stringify(p) }),
-      })
-      insertFiles(ctx.db, runId, files)
-      await stream.writeSSE({ data: JSON.stringify({ runId, count: files.length }) })
+      const noop = () => {}
+      const write = (data: string) => stream.writeSSE({ data }).catch(noop)
+      try {
+        const files = await scan(roots, {
+          dataDir: ctx.getDataDir(),
+          signal: c.req.raw.signal,
+          onProgress: p => write(JSON.stringify(p)),
+        })
+        insertFiles(ctx.db, runId, files)
+        await stream.writeSSE({ data: JSON.stringify({ runId, count: files.length }) })
+      } catch (e) {
+        await stream.writeSSE({ event: 'error', data: JSON.stringify({ message: (e as Error).message }) }).catch(noop)
+        throw e
+      }
     })
   })
   app.get('/api/files', c => {
